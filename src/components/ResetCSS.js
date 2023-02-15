@@ -1,5 +1,5 @@
-import styled from "styled-components";
-const BodyContent = styled.div`
+import { createGlobalStyle } from "styled-components";
+const ResetCSS = createGlobalStyle`
   html,
   body,
   div,
@@ -84,12 +84,11 @@ const BodyContent = styled.div`
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
+    font-size: 20px;
     vertical-align: baseline;
   }
   * {
-    font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans",
-      "Helvetica Neue", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   article,
   aside,
@@ -105,11 +104,6 @@ const BodyContent = styled.div`
     display: block;
   }
   body {
-    width: 100vw;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     line-height: 1;
   }
   ol,
@@ -132,4 +126,4 @@ const BodyContent = styled.div`
     border-spacing: 0;
   }
 `;
-export default BodyContent;
+export default ResetCSS;

@@ -1,7 +1,17 @@
-// import palavras from "./palavras";
 import Jogo from "./Jogo";
-import BodyContent from "./components/BodyContent";
 import Letras from "./Letras";
+import ScreenLayout from "./components/ScreenLayout";
+function App() {
+  return (
+    <ScreenLayout>
+      <Jogo />
+      <Letras />
+    </ScreenLayout>
+  );
+}
+export default App;
+
+// import palavras from "./palavras";
 // const alfabeto = [
 //   "a",
 //   "b",
@@ -30,12 +40,3 @@ import Letras from "./Letras";
 //   "y",
 //   "z",
 // ];
-function App() {
-  return (
-    <BodyContent>
-      <Jogo></Jogo>
-      <Letras></Letras>
-    </BodyContent>
-  );
-}
-export default App;
