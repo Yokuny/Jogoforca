@@ -11,19 +11,21 @@ import {
   AnswerProgression,
 } from "./components/Jogo-Components/JogoComponents";
 
-const Jogo = ({ palavras }) => {
-  let letras = [];
-  for (let i = 0; i < palavras[12].length; i++) {
-    letras.push(palavras[12][i]);
-  }
 
+const Jogo = ({ palavra, startGame }) => {
+  let letras = [];
+  for (let i = 0; i < palavra.length; i++) {
+    letras.push(palavra[i]);
+  }
   return (
     <GridDisplace className="grid-displace">
       <GallowsImg>
         <img src={forca6} alt="" />
       </GallowsImg>
       <StartBtn>
-        <button type="submit">Escolher Palavra</button>
+        <button onClick={startGame} type="submit">
+          Escolher Palavra
+        </button>
       </StartBtn>
       <AnswerProgression>
         {letras.map((word, index) => {
