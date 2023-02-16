@@ -25,12 +25,16 @@ const Keys = styled.div`
     background: #c9e0f5;
   }
 `;
-const Letras = ({ keys }) => {
+const Letras = ({ keys, jogada }) => {
   // Criar o onlick em cada button
   return (
     <Keys>
-      {keys.map((letter) => {
-        return <button key={letter}>{letter.toUpperCase()}</button>;
+      {keys.map((letter, index) => {
+        return (
+          <button key={`${letter}${index}`} onClick={jogada}>
+            {letter.toUpperCase()}
+          </button>
+        );
       })}
     </Keys>
   );
