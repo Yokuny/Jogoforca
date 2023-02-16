@@ -41,7 +41,7 @@ export const StartBtn = styled.div`
     transition: all 0.2s ease-in-out;
     &:hover {
       font-size: 21px;
-      border: 1px solid white;
+      border: 3px solid yellowgreen;
     }
   }
 `;
@@ -56,5 +56,13 @@ export const AnswerProgression = styled.div`
     font-size: 50px;
     line-height: 68px;
     color: #ff0000;
+    cursor: pointer;
+    transition: all 0.1s ease-in;
+  }
+  h4:hover {
+    background-color: #00000011;
+    border-radius: 6px;
+    padding: 8px;
+    padding-bottom: 16px;
   }
 `;
