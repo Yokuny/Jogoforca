@@ -23,6 +23,16 @@ function App() {
   const [alphabet, setAlphabet] = useState(blankAlphabet);
 
   const jogada = ({ target }) => {
+    
+    setPalavra(
+      palavra.map((current) => {
+        if (current.letter === target.textContent) {
+          return { letter: current.letter, choice: true };
+        } else {
+          return current;
+        }
+      })
+    );
     //check if the letter is in the "palavra"
     //check if misplays is less than 6
     if (!target) {
