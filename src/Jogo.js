@@ -25,8 +25,8 @@ const Jogo = ({ palavra, startGame, misplayAmount }) => {
         </button>
       </StartBtn>
       <AnswerProgression>
-        {palavra.map((word, index) => {
-          return <h4 key={`word${index}`}>{word.letter.toUpperCase()}</h4>;
+        {palavra.map((aLetter, index) => {
+          return <h4 key={`word${index}`}>{aLetter.choice ? aLetter.letter : "_"}</h4>;
         })}
       </AnswerProgression>
     </GridDisplace>

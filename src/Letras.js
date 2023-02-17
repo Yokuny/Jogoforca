@@ -2,10 +2,11 @@ import Keys from "./components/Jogo-Components/LetrasComponents";
 const Letras = ({ keys, jogada }) => {
   return (
     <Keys>
-      {keys.map((letter, index) => {
+      {keys.map((letter) => {
+        // console.log(letter);
         return (
-          <button disabled={letter.choice} key={`${letter.letter}${index}`} onClick={jogada}>
-            {letter.letter.toUpperCase()}
+          <button disabled={letter.choice} key={letter.letter} onClick={jogada}>
+            {letter.letter}
           </button>
         );
       })}
