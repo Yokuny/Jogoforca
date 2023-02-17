@@ -10,9 +10,9 @@ const letterChoice = (letter, choice = true) => ({ letter, choice });
 let blankAlphabet = [];
 let blankWord = [];
 alfabeto.forEach((letter) => {
-  blankAlphabet.push(letterChoice(letter, false));
+  blankAlphabet.push(letterChoice(letter));
 });
-"abcdefgh".split("").forEach((letter) => {
+"".split("").forEach((letter) => {
   blankWord.push(letterChoice(letter, false));
 });
 
@@ -21,6 +21,7 @@ function App() {
   const [misplay, setMisplay] = useState(0);
   const [alphabet, setAlphabet] = useState(blankAlphabet);
   const jogada = ({ target }) => {
+    console.log(">>>");
     //check if the letter is in the "palavra"
     //check if misplays is less than 6
     if (!target) {

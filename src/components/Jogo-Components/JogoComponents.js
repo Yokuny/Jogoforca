@@ -54,10 +54,15 @@ export const AnswerProgression = styled.div`
     font-family: "Noto Sans";
     font-weight: 700;
     font-size: 50px;
-    line-height: 68px;
-    color: #ff0000;
+    color: #000;
     cursor: pointer;
     transition: all 0.1s ease-in;
+  }
+  &.lose {
+    color: #ff0000;
+  }
+  &.win {
+    color: #27ae60;
   }
   h4::after {
     content: " ";

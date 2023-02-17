@@ -4,7 +4,7 @@ const Letras = ({ keys, jogada }) => {
     <Keys>
       {keys.map((letter, index) => {
         return (
-          <button key={`${letter.letter}${index}`} onClick={jogada}>
+          <button disabled={letter.choice} key={`${letter.letter}${index}`} onClick={jogada}>
             {letter.letter.toUpperCase()}
           </button>
         );

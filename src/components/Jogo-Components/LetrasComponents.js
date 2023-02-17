@@ -24,5 +24,9 @@ const Keys = styled.div`
   button:hover {
     background: #c9e0f5;
   }
+  button:disabled {
+    cursor: not-allowed;
+    background: #9faab5;
+  }
 `;
 export default Keys;
