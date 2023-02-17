@@ -59,6 +59,10 @@ export const AnswerProgression = styled.div`
     cursor: pointer;
     transition: all 0.1s ease-in;
   }
+  h4::after {
+    content: " ";
+    white-space: pre;
+  }
   h4:hover {
     background-color: #00000011;
     border-radius: 6px;

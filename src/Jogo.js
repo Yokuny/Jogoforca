@@ -11,14 +11,9 @@ import {
   StartBtn,
   AnswerProgression,
 } from "./components/Jogo-Components/JogoComponents";
-
 const forca = [forca0, forca1, forca2, forca3, forca4, forca5, forca6];
 
 const Jogo = ({ palavra, startGame, misplayAmount }) => {
-  let letras = [];
-  for (let i = 0; i < palavra.length; i++) {
-    letras.push(palavra[i]);
-  }
   return (
     <GridDisplace className="grid-displace">
       <GallowsImg>
@@ -30,8 +25,8 @@ const Jogo = ({ palavra, startGame, misplayAmount }) => {
         </button>
       </StartBtn>
       <AnswerProgression>
-        {letras.map((word, index) => {
-          return <h4 key={`word${index}`}>{word.toUpperCase()}</h4>;
+        {palavra.map((word, index) => {
+          return <h4 key={`word${index}`}>{word.letter.toUpperCase()}</h4>;
         })}
       </AnswerProgression>
     </GridDisplace>
