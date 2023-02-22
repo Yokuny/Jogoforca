@@ -22,8 +22,20 @@ function App() {
   const [misplay, setMisplay] = useState(0);
   const [alphabet, setAlphabet] = useState(blankAlphabet);
 
+  const wordCheck = ({ textContent }) => {
+    let currentState = palavra;
+    let letterFound = 0;
+    currentState.forEach(({ letter }) => {
+      if (letter === textContent) letterFound++;
+    });
+    if (letterFound === 0) {
+      setMisplay(misplay + 1);
+      letterFound = 0;
+    }
+  };
   const jogada = ({ target }) => {
-    
+    if (misplay >= 6) return;
+    wordCheck(target);
     setPalavra(
       palavra.map((current) => {
         if (current.letter === target.textContent) {
@@ -33,14 +45,6 @@ function App() {
         }
       })
     );
-    //check if the letter is in the "palavra"
-    //check if misplays is less than 6
-    if (!target) {
-      setMisplay(misplay + 1);
-    } else {
-      setMisplay(misplay);
-    }
-    //change the alfabeto array to remove the letter
   };
 
   const startGame = () => {

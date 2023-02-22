@@ -3,9 +3,8 @@ const Letras = ({ keys, jogada }) => {
   return (
     <Keys>
       {keys.map((letter) => {
-        // console.log(letter);
         return (
-          <button disabled={letter.choice} key={letter.letter} onClick={jogada}>
+          <button disabled={letter.choice} key={letter.letter} onClick={(e) => jogada(e)}>
             {letter.letter}
           </button>
         );
