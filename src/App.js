@@ -22,6 +22,7 @@ function App() {
   const [misplay, setMisplay] = useState(0);
   const [alphabet, setAlphabet] = useState(blankAlphabet);
   const [wordColor, setWordColor] = useState("black");
+  const [blockInput, setBlockInput] = useState(true);
 
   const closeKeys = (win) => {
     setAlphabet(
@@ -29,6 +30,7 @@ function App() {
         return { letter: letter.letter, choice: true };
       })
     );
+    setBlockInput(true);
     if (win) setWordColor("win");
     else setWordColor("lose");
   };
@@ -91,14 +93,16 @@ function App() {
     });
     setPalavra(newWord);
     setAlphabet(activeAlphabet);
+    setMisplay(0);
     setWordColor("black");
+    setBlockInput(false);
   };
   //
   return (
     <ScreenLayout>
       <Jogo palavra={palavra} misplayAmount={misplay} startGame={startGame} wordColor={wordColor} />
       <Letras keys={alphabet} jogada={jogada} />
-      <Chute />
+      <Chute input={blockInput} />
     </ScreenLayout>
   );
 }

@@ -46,14 +46,19 @@ const FieldForm = styled.form`
     cursor: pointer;
     background: #c9e0f2;
   }
+  button:disabled,
+  input:disabled {
+    cursor: not-allowed;
+    background: #9faab5;
+  }
 `;
-const Chute = () => {
+const Chute = ({ input }) => {
   return (
     <ChuteContainer>
       <FieldForm>
         <label htmlFor="chute">Já sei a palavra!</label>
-        <input type="text" minLength={4} maxLength={16} data-test="guess-input" />
-        <button type="submit" data-test="guess-button">
+        <input disabled={input} type="text" minLength={4} maxLength={16} data-test="guess-input" />
+        <button disabled={input} type="submit" data-test="guess-button">
           Chutar
         </button>
       </FieldForm>

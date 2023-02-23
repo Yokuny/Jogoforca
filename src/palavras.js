@@ -188,5 +188,5 @@ const palavras = [
   "zinco",
   "zumbido",
 ];
-// posso acrescentar palavras apenas
+
 export default palavras;

@@ -70,10 +70,10 @@ export const AnswerProgression = styled.div`
     content: " ";
     white-space: pre;
   }
-  h4:hover {
+  /* h4:hover {
     background-color: #00000011;
     border-radius: 6px;
     padding: 8px;
     padding-bottom: 16px;
-  }
+  } */
 `;
