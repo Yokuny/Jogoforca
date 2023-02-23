@@ -52,8 +52,10 @@ const Chute = () => {
     <ChuteContainer>
       <FieldForm>
         <label htmlFor="chute">Já sei a palavra!</label>
-        <input type="text" minLength={4} maxLength={16} />
-        <button type="submit">Chutar</button>
+        <input type="text" minLength={4} maxLength={16} data-test="guess-input" />
+        <button type="submit" data-test="guess-button">
+          Chutar
+        </button>
       </FieldForm>
     </ChuteContainer>
   );

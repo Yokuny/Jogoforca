@@ -21,32 +21,64 @@ function App() {
   const [palavra, setPalavra] = useState(blankWord);
   const [misplay, setMisplay] = useState(0);
   const [alphabet, setAlphabet] = useState(blankAlphabet);
+  const [wordColor, setWordColor] = useState("black");
 
+  const closeKeys = (win) => {
+    setAlphabet(
+      alphabet.map((letter) => {
+        return { letter: letter.letter, choice: true };
+      })
+    );
+    if (win) setWordColor("win");
+    else setWordColor("lose");
+  };
   const wordCheck = ({ textContent }) => {
-    let currentState = palavra;
     let letterFound = 0;
-    currentState.forEach(({ letter }) => {
+    let currentMisplay = misplay;
+    palavra.forEach(({ letter }) => {
       if (letter === textContent) letterFound++;
     });
     if (letterFound === 0) {
-      setMisplay(misplay + 1);
+      setMisplay(currentMisplay + 1);
+      if (currentMisplay + 1 >= 6) {
+        closeKeys(false);
+      }
       letterFound = 0;
     }
   };
-  const jogada = ({ target }) => {
-    if (misplay >= 6) return;
-    wordCheck(target);
-    setPalavra(
-      palavra.map((current) => {
-        if (current.letter === target.textContent) {
-          return { letter: current.letter, choice: true };
+  const letterMark = ({ textContent }) => {
+    setAlphabet(
+      alphabet.map((letter) => {
+        if (letter.letter === textContent) {
+          return { letter: letter.letter, choice: true };
         } else {
-          return current;
+          return letter;
         }
       })
     );
   };
+  const wordMark = ({ textContent }) => {
+    let count = 0;
+    setPalavra(
+      palavra.map((current) => {
+        if (current.letter === textContent) {
+          count++;
+          return { letter: current.letter, choice: true };
+        } else {
+          if (current.choice === true) count++;
+          return current;
+        }
+      })
+    );
+    if (count === palavra.length) closeKeys(true);
+  };
 
+  const jogada = ({ target }) => {
+    wordCheck(target);
+    letterMark(target);
+    wordMark(target);
+  };
+  //
   const startGame = () => {
     const theWord = palavras[Math.floor(Math.random() * palavras.length)];
     let newWord = [];
@@ -59,11 +91,12 @@ function App() {
     });
     setPalavra(newWord);
     setAlphabet(activeAlphabet);
+    setWordColor("black");
   };
-
+  //
   return (
     <ScreenLayout>
-      <Jogo palavra={palavra} misplayAmount={misplay} startGame={startGame} />
+      <Jogo palavra={palavra} misplayAmount={misplay} startGame={startGame} wordColor={wordColor} />
       <Letras keys={alphabet} jogada={jogada} />
       <Chute />
     </ScreenLayout>

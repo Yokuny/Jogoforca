@@ -13,21 +13,25 @@ import {
 } from "./components/Jogo-Components/JogoComponents";
 const forca = [forca0, forca1, forca2, forca3, forca4, forca5, forca6];
 
-const Jogo = ({ palavra, startGame, misplayAmount }) => {
+const Jogo = ({ palavra, startGame, misplayAmount, wordColor }) => {
   console.log(palavra);
   return (
     <GridDisplace className="grid-displace">
       <GallowsImg>
-        <img src={forca[misplayAmount]} alt="" />
+        <img src={forca[misplayAmount]} alt="" data-test="game-image" />
       </GallowsImg>
       <StartBtn>
-        <button onClick={startGame} type="submit">
+        <button onClick={startGame} type="submit" data-test="choose-word">
           Escolher Palavra
         </button>
       </StartBtn>
       <AnswerProgression>
         {palavra.map((aLetter, index) => {
-          return <h4 key={`word${index}`}>{aLetter.choice ? aLetter.letter : "_"}</h4>;
+          return (
+            <h4 className={wordColor} key={`word${index}`} data-test="word">
+              {aLetter.choice ? aLetter.letter : "_"}
+            </h4>
+          );
         })}
       </AnswerProgression>
     </GridDisplace>

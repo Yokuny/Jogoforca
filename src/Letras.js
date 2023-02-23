@@ -4,7 +4,7 @@ const Letras = ({ keys, jogada }) => {
     <Keys>
       {keys.map((letter) => {
         return (
-          <button disabled={letter.choice} key={letter.letter} onClick={(e) => jogada(e)}>
+          <button disabled={letter.choice} key={letter.letter} onClick={(e) => jogada(e)} data-test="letter">
             {letter.letter}
           </button>
         );
