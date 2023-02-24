@@ -14,7 +14,6 @@ import {
 const forca = [forca0, forca1, forca2, forca3, forca4, forca5, forca6];
 
 const Jogo = ({ palavra, startGame, misplayAmount, wordColor }) => {
-  console.table(palavra);
   return (
     <GridDisplace className="grid-displace">
       <GallowsImg>
@@ -31,6 +30,14 @@ const Jogo = ({ palavra, startGame, misplayAmount, wordColor }) => {
             <h4 className={wordColor} key={`word${index}`} data-test="word">
               {aLetter.choice ? aLetter.letter : "_"}
             </h4>
+          );
+        })}
+        {/* //////////////////// */}
+        {palavra.map((aLetter) => {
+          return (
+            <div>
+              <pre>{JSON.stringify(aLetter)}</pre>
+            </div>
           );
         })}
       </AnswerProgression>

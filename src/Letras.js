@@ -9,6 +9,14 @@ const Letras = ({ keys, jogada }) => {
           </button>
         );
       })}
+      {/* //////////////////// */}
+      {keys.map((aLetter) => {
+        return (
+          <div>
+            <pre>{JSON.stringify(aLetter)}</pre>
+          </div>
+        );
+      })}
     </Keys>
   );
 };

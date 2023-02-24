@@ -8,58 +8,59 @@ import alfabeto from "./assets/script/alfabeto";
 import palavras from "./palavras";
 
 const letterChoice = (letter, choice = true) => ({ letter, choice });
-let blankAlphabet = [];
+let blankKeyboard = [];
 alfabeto.forEach((letter) => {
-  blankAlphabet.push(letterChoice(letter));
+  blankKeyboard.push(letterChoice(letter));
 });
 
 function App() {
   const [palavra, setPalavra] = useState([letterChoice("")]);
   const [misplay, setMisplay] = useState(0);
-  const [alphabet, setAlphabet] = useState(blankAlphabet);
+  const [keyboard, setKeyboard] = useState(blankKeyboard);
   const [wordColor, setWordColor] = useState("black");
   const [blockInput, setBlockInput] = useState(true);
-
-  const closeKeys = (win) => {
-    const theWord = palavras[Math.floor(Math.random() * palavras.length)];
-    let newWord = [];
-    let activeAlphabet = [];
-    theWord.split("").forEach((letter) => {
-      newWord.push(letterChoice(letter, false));
+  const wordColorMark = (win) => {
+    const newKeyboard = keyboard.map((key) => {
+      return {
+        letter: key.letter,
+        choice: true,
+      };
     });
-    alphabet.forEach((letter) => {
-      activeAlphabet.push(letterChoice(letter.letter, false));
-    });
-    setPalavra(newWord);
-
-    setPalavra(palavra.map((current) => ({ letter: current.letter, choice: true })));
+    setKeyboard(newKeyboard);
     setBlockInput(true);
-    if (win === "win") {
-      setWordColor(win);
-    }
     if (win === "lose") {
       setWordColor(win);
     }
-    setAlphabet(blankAlphabet.map((letter) => letterChoice(letter.letter)));
+    if (win === "win") {
+      setWordColor(win);
+    }
   };
 
-  const wordCheck = ({ textContent }) => {
+  const misCheck = ({ textContent }) => {
+    //essa função verifica se a letra escolhida está na palavra
     let letterFound = 0;
     let currentMisplay = misplay;
-
     palavra.forEach(({ letter }) => {
       if (letter === textContent) letterFound++;
     });
     if (letterFound === 0) {
       setMisplay(currentMisplay + 1);
+      const newKeyboard = keyboard.map((key) => {
+        return {
+          letter: key.letter,
+          choice: true,
+        };
+      });
+      setKeyboard(newKeyboard);
+      //aqui quer dizer que perdeu
       if (currentMisplay + 1 >= 6) {
-        closeKeys("lose");
+        wordColorMark("lose");
       }
     }
   };
-  const letterMark = ({ textContent }) => {
-    setAlphabet(
-      alphabet.map((letter) => {
+  const closeLetter = ({ textContent }) => {
+    setKeyboard(
+      keyboard.map((letter) => {
         if (letter.letter === textContent) {
           return { letter: letter.letter, choice: true };
         } else {
@@ -81,34 +82,36 @@ function App() {
         }
       })
     );
-    if (count === palavra.length) closeKeys("win");
+    if (count === palavra.length) {
+      wordColorMark("win");
+    }
   };
   const jogada = ({ target }) => {
-    wordCheck(target);
-    letterMark(target);
+    misCheck(target);
+    closeLetter(target);
     wordMark(target);
   };
 
   const startGame = () => {
     const theWord = palavras[Math.floor(Math.random() * palavras.length)];
     let newWord = [];
-    let activeAlphabet = [];
+    let activeKeyboard = [];
     theWord.split("").forEach((letter) => {
       newWord.push(letterChoice(letter, false));
     });
-    alphabet.forEach((letter) => {
-      activeAlphabet.push(letterChoice(letter.letter, false));
+    keyboard.forEach((letter) => {
+      activeKeyboard.push(letterChoice(letter.letter, false));
     });
     setPalavra(newWord);
     setMisplay(0);
-    setAlphabet(activeAlphabet);
+    setKeyboard(activeKeyboard);
     setWordColor("black");
     setBlockInput(false);
   };
   return (
     <ScreenLayout>
       <Jogo palavra={palavra} misplayAmount={misplay} startGame={startGame} wordColor={wordColor} />
-      <Letras keys={alphabet} jogada={jogada} />
+      <Letras keys={keyboard} jogada={jogada} />
       <Chute input={blockInput} />
     </ScreenLayout>
   );
