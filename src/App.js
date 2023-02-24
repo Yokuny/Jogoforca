@@ -21,16 +21,28 @@ function App() {
   const [blockInput, setBlockInput] = useState(true);
 
   const closeKeys = (win) => {
-    setAlphabet(blankAlphabet.map((letter) => letterChoice(letter.letter)));
+    const theWord = palavras[Math.floor(Math.random() * palavras.length)];
+    let newWord = [];
+    let activeAlphabet = [];
+    theWord.split("").forEach((letter) => {
+      newWord.push(letterChoice(letter, false));
+    });
+    alphabet.forEach((letter) => {
+      activeAlphabet.push(letterChoice(letter.letter, false));
+    });
+    setPalavra(newWord);
+
     setPalavra(palavra.map((current) => ({ letter: current.letter, choice: true })));
     setBlockInput(true);
-    if (win) {
-      setWordColor("win");
-    } else {
-      setWordColor("lose");
-      setAlphabet(alphabet.map((letter) => ({ letter: letter.letter, choice: true })));
-    } //////////////
+    if (win === "win") {
+      setWordColor(win);
+    }
+    if (win === "lose") {
+      setWordColor(win);
+    }
+    setAlphabet(blankAlphabet.map((letter) => letterChoice(letter.letter)));
   };
+
   const wordCheck = ({ textContent }) => {
     let letterFound = 0;
     let currentMisplay = misplay;
@@ -41,9 +53,8 @@ function App() {
     if (letterFound === 0) {
       setMisplay(currentMisplay + 1);
       if (currentMisplay + 1 >= 6) {
-        closeKeys(false);
+        closeKeys("lose");
       }
-      letterFound = 0;
     }
   };
   const letterMark = ({ textContent }) => {
@@ -70,7 +81,7 @@ function App() {
         }
       })
     );
-    if (count === palavra.length) closeKeys(true);
+    if (count === palavra.length) closeKeys("win");
   };
   const jogada = ({ target }) => {
     wordCheck(target);
