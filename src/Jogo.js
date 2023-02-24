@@ -14,7 +14,7 @@ import {
 const forca = [forca0, forca1, forca2, forca3, forca4, forca5, forca6];
 
 const Jogo = ({ palavra, startGame, misplayAmount, wordColor }) => {
-  console.log(palavra);
+  console.table(palavra);
   return (
     <GridDisplace className="grid-displace">
       <GallowsImg>

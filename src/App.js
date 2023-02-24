@@ -6,37 +6,35 @@ import Letras from "./Letras";
 import Chute from "./components/Jogo-Components/Chute";
 import alfabeto from "./assets/script/alfabeto";
 import palavras from "./palavras";
-// 
+
 const letterChoice = (letter, choice = true) => ({ letter, choice });
 let blankAlphabet = [];
-let blankWord = [];
 alfabeto.forEach((letter) => {
   blankAlphabet.push(letterChoice(letter));
 });
-"".split("").forEach((letter) => {
-  blankWord.push(letterChoice(letter, false));
-});
-// 
+
 function App() {
-  const [palavra, setPalavra] = useState(blankWord);
+  const [palavra, setPalavra] = useState([letterChoice("")]);
   const [misplay, setMisplay] = useState(0);
   const [alphabet, setAlphabet] = useState(blankAlphabet);
   const [wordColor, setWordColor] = useState("black");
   const [blockInput, setBlockInput] = useState(true);
 
   const closeKeys = (win) => {
-    setAlphabet(
-      alphabet.map((letter) => {
-        return { letter: letter.letter, choice: true };
-      })
-    );
+    setAlphabet(blankAlphabet.map((letter) => letterChoice(letter.letter)));
+    setPalavra(palavra.map((current) => ({ letter: current.letter, choice: true })));
     setBlockInput(true);
-    if (win) setWordColor("win");
-    else setWordColor("lose");
+    if (win) {
+      setWordColor("win");
+    } else {
+      setWordColor("lose");
+      setAlphabet(alphabet.map((letter) => ({ letter: letter.letter, choice: true })));
+    } //////////////
   };
   const wordCheck = ({ textContent }) => {
     let letterFound = 0;
     let currentMisplay = misplay;
+
     palavra.forEach(({ letter }) => {
       if (letter === textContent) letterFound++;
     });
@@ -74,13 +72,12 @@ function App() {
     );
     if (count === palavra.length) closeKeys(true);
   };
-
   const jogada = ({ target }) => {
     wordCheck(target);
     letterMark(target);
     wordMark(target);
   };
-  //
+
   const startGame = () => {
     const theWord = palavras[Math.floor(Math.random() * palavras.length)];
     let newWord = [];
@@ -92,12 +89,11 @@ function App() {
       activeAlphabet.push(letterChoice(letter.letter, false));
     });
     setPalavra(newWord);
-    setAlphabet(activeAlphabet);
     setMisplay(0);
+    setAlphabet(activeAlphabet);
     setWordColor("black");
     setBlockInput(false);
   };
-  //
   return (
     <ScreenLayout>
       <Jogo palavra={palavra} misplayAmount={misplay} startGame={startGame} wordColor={wordColor} />
