@@ -19,43 +19,19 @@ function App() {
   const [keyboard, setKeyboard] = useState(blankKeyboard);
   const [wordColor, setWordColor] = useState("black");
   const [blockInput, setBlockInput] = useState(true);
-  const wordColorMark = (win) => {
-    const newKeyboard = keyboard.map((key) => {
-      return {
-        letter: key.letter,
-        choice: true,
-      };
-    });
-    setKeyboard(newKeyboard);
-    setBlockInput(true);
-    if (win === "lose") {
-      setWordColor(win);
-    }
-    if (win === "win") {
-      setWordColor(win);
-    }
-  };
-
   const misCheck = ({ textContent }) => {
-    //essa função verifica se a letra escolhida está na palavra
     let letterFound = 0;
-    let currentMisplay = misplay;
     palavra.forEach(({ letter }) => {
       if (letter === textContent) letterFound++;
     });
     if (letterFound === 0) {
-      setMisplay(currentMisplay + 1);
-      const newKeyboard = keyboard.map((key) => {
-        return {
-          letter: key.letter,
-          choice: true,
-        };
+      setMisplay((curr) => {
+        if (curr >= 5) {
+          final("lose");
+        } else {
+          return curr + 1;
+        }
       });
-      setKeyboard(newKeyboard);
-      //aqui quer dizer que perdeu
-      if (currentMisplay + 1 >= 6) {
-        wordColorMark("lose");
-      }
     }
   };
   const closeLetter = ({ textContent }) => {
@@ -83,15 +59,27 @@ function App() {
       })
     );
     if (count === palavra.length) {
-      wordColorMark("win");
+      final("win");
     }
+  };
+  const final = (win) => {
+    setPalavra(palavra.map((current) => ({ letter: current.letter, choice: true })));
+    setKeyboard(blankKeyboard);
+    setMisplay(6);
+    if (win === "lose") {
+      setWordColor(win);
+    }
+    if (win === "win") {
+      setWordColor(win);
+    }
+    setBlockInput(true);
   };
   const jogada = ({ target }) => {
     misCheck(target);
     closeLetter(target);
     wordMark(target);
   };
-
+  //
   const startGame = () => {
     const theWord = palavras[Math.floor(Math.random() * palavras.length)];
     let newWord = [];
@@ -102,9 +90,9 @@ function App() {
     keyboard.forEach((letter) => {
       activeKeyboard.push(letterChoice(letter.letter, false));
     });
-    setPalavra(newWord);
+    setPalavra((current) => (current = newWord));
+    setKeyboard((previous) => (previous = activeKeyboard));
     setMisplay(0);
-    setKeyboard(activeKeyboard);
     setWordColor("black");
     setBlockInput(false);
   };

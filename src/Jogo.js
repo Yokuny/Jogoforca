@@ -32,14 +32,6 @@ const Jogo = ({ palavra, startGame, misplayAmount, wordColor }) => {
             </h4>
           );
         })}
-        {/* //////////////////// */}
-        {palavra.map((aLetter) => {
-          return (
-            <div>
-              <pre>{JSON.stringify(aLetter)}</pre>
-            </div>
-          );
-        })}
       </AnswerProgression>
     </GridDisplace>
   );
