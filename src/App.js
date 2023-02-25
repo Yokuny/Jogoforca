@@ -6,13 +6,11 @@ import Letras from "./Letras";
 import Chute from "./components/Jogo-Components/Chute";
 import alfabeto from "./assets/script/alfabeto";
 import palavras from "./palavras";
-
 const letterChoice = (letter, choice = true) => ({ letter, choice });
 let blankKeyboard = [];
 alfabeto.forEach((letter) => {
   blankKeyboard.push(letterChoice(letter));
 });
-
 function App() {
   const [palavra, setPalavra] = useState([letterChoice("")]);
   const [misplay, setMisplay] = useState(0);
@@ -74,12 +72,6 @@ function App() {
     }
     setBlockInput(true);
   };
-  const jogada = ({ target }) => {
-    misCheck(target);
-    closeLetter(target);
-    wordMark(target);
-  };
-  //
   const startGame = () => {
     const theWord = palavras[Math.floor(Math.random() * palavras.length)];
     let newWord = [];
@@ -96,11 +88,23 @@ function App() {
     setWordColor("black");
     setBlockInput(false);
   };
+  const jogada = ({ target }) => {
+    misCheck(target);
+    closeLetter(target);
+    wordMark(target);
+  };
+  const bet = (value) => {
+    if (value === palavra.map((current) => current.letter).join("")) {
+      final("win");
+    } else {
+      final("lose");
+    }
+  };
   return (
     <ScreenLayout>
       <Jogo palavra={palavra} misplayAmount={misplay} startGame={startGame} wordColor={wordColor} />
       <Letras keys={keyboard} jogada={jogada} />
-      <Chute input={blockInput} />
+      <Chute input={blockInput} bet={bet} />
     </ScreenLayout>
   );
 }

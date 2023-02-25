@@ -72,10 +72,15 @@ const FieldForm = styled.form`
     flex-direction: column;
   }
 `;
-const Chute = ({ input }) => {
+const Chute = ({ input, bet }) => {
   return (
     <ChuteContainer>
-      <FieldForm>
+      <FieldForm
+        onSubmit={(e) => {
+          e.preventDefault();
+          bet(e.target[0].value);
+          e.target[0].value = "";
+        }}>
         <label htmlFor="chute">Já sei a palavra!</label>
         <input disabled={input} type="text" minLength={4} maxLength={16} data-test="guess-input" />
         <button disabled={input} type="submit" data-test="guess-button">
