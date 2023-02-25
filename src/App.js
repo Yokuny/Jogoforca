@@ -65,8 +65,8 @@ function App() {
   const final = (win) => {
     setPalavra(palavra.map((current) => ({ letter: current.letter, choice: true })));
     setKeyboard(blankKeyboard);
-    setMisplay(6);
     if (win === "lose") {
+      setMisplay(6);
       setWordColor(win);
     }
     if (win === "win") {

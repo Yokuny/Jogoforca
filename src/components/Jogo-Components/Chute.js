@@ -3,6 +3,9 @@ const ChuteContainer = styled.div`
   padding: 56px 0px;
   display: flex;
   align-items: center;
+  @media (max-width: 1024px) {
+    padding: 38px 0px;
+  }
 `;
 const FieldForm = styled.form`
   display: inline-flex;
@@ -50,6 +53,23 @@ const FieldForm = styled.form`
   input:disabled {
     cursor: not-allowed;
     background: #9faab5;
+  }
+  @media (max-width: 1024px) {
+    label {
+      font-size: 16px;
+    }
+    input {
+      height: 36px;
+      font-size: 16px;
+    }
+    button {
+      height: 36px;
+      font-size: 14px;
+    }
+  }
+  @media (max-width: 540px) {
+    display: flex;
+    flex-direction: column;
   }
 `;
 const Chute = ({ input }) => {
