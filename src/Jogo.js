@@ -24,10 +24,10 @@ const Jogo = ({ palavra, startGame, misplayAmount, wordColor }) => {
           Escolher Palavra
         </button>
       </StartBtn>
-      <AnswerProgression>
+      <AnswerProgression data-test="word">
         {palavra.map((aLetter, index) => {
           return (
-            <h4 className={wordColor} key={`word${index}`} data-test="word">
+            <h4 className={wordColor} key={`word${index}`}>
               {aLetter.choice ? aLetter.letter : "_"}
             </h4>
           );
