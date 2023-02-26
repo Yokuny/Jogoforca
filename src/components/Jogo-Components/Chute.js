@@ -78,7 +78,7 @@ const Chute = ({ input, bet }) => {
       <FieldForm
         onSubmit={(e) => {
           e.preventDefault();
-          bet(e.target[0].value);
+          bet(e.target[0].value.toLowerCase());
           e.target[0].value = "";
         }}>
         <label htmlFor="chute">Já sei a palavra!</label>

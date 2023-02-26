@@ -93,6 +93,7 @@ function App() {
     closeLetter(target);
     wordMark(target);
   };
+  console.log(palavra);
   const bet = (value) => {
     if (value === palavra.map((current) => current.letter).join("")) {
       final("win");
